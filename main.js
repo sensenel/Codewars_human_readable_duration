@@ -14,13 +14,37 @@
 
 
 function formatDuration (seconds) {
-    
+    /* seconds = seconds / 1000;
+        console.log(seconds); */
+    const timeUnits = {
+        year: 31536000,
+        day: 86400,
+        hour: 3600,
+        minute: 60,
+        second: 1
+    }
+    let result = {};
+
+/*     return (seconds === 0 ) ? "now" : 
+    (seconds < 0 ) ? "no valid number" : 
+    (seconds === 1) ? `${seconds} second` :   */
+
+    Object.keys(timeUnits).forEach(key => {
+            //console.log(timeUnits[key]);        
+        result[key] = seconds / timeUnits[key];
+            //console.log(result[key]);        
+    }); 
+
+    return result;
+
+
 }
   
 
+console.log(formatDuration(60));
 
 console.log('\n');
-console.log('1 second\n' + formatDuration(1));//, "1 second");
+/*console.log('1 second\n' + formatDuration(1));//, "1 second");
 console.log('-----------------------------\n');
 console.log('1 minute and 2 seconds\n' + formatDuration(62));//, "1 minute and 2 seconds");
 console.log('-----------------------------\n');
@@ -28,5 +52,5 @@ console.log('2 minutes\n' + formatDuration(120));//, "2 minutes");
 console.log('-----------------------------\n');
 console.log('1 hour\n'+ +formatDuration(3600));//, "1 hour");
 console.log('-----------------------------\n');
-console.log('1 hour, 1 minute and 2 seconds\n' + formatDuration(3662));//, "1 hour, 1 minute and 2 seconds");
+console.log('1 hour, 1 minute and 2 seconds\n' + formatDuration(3662));//, "1 hour, 1 minute and 2 seconds"); */
 console.log('\n');
