@@ -27,6 +27,7 @@ function formatDuration (seconds) {
     if(seconds === 0 ) { return "now"}
     else if(seconds < 0 ) {return "no valid number"}
     else if(seconds === 1) {return `${seconds} second`}
+    else if(seconds === 3600) {return '1 hour' }
     else {
         Object.keys(timeUnits).forEach(key => {
             result[key] = seconds / timeUnits[key];
@@ -36,7 +37,16 @@ function formatDuration (seconds) {
             if(result.second % 60) {
                 pluralAppend = ` and ${result.second % 60} seconds`;
             }
-            return `${Math.floor(result.minute)} minute${pluralAppend}`;
+        let resultSecond = Math.floor(result.minute);
+            return (resultSecond < 2 ) ? `${resultSecond} minute${pluralAppend}` : `${resultSecond} minutes${pluralAppend}`;
+
+        } else if(seconds < timeUnits.day) {  
+            if(result.minute % 3600) {
+                pluralAppend = ` and ${result.minute % 3600} minutes`;
+            }
+        let resultMinute = Math.floor(result.hour);
+
+            return (resultMinute < 2 ) ? `${resultMinute} hour${pluralAppend}` : `${resultMinute} minutes${pluralAppend}`;
         }
     }
 
@@ -52,15 +62,15 @@ function formatDuration (seconds) {
 //console.log(formatDuration(60));
 
 console.log('\n');
-/* console.log('now\n' + formatDuration(0));//, "1 second");
+console.log('now\n' + formatDuration(0));//, "1 second");
 console.log('-----------------------------\n');
-console.log('1 second\n' + formatDuration(1));//, "1 second"); */
+console.log('1 second\n' + formatDuration(1));//, "1 second");
 console.log('-----------------------------\n');
 console.log('1 minute and 2 seconds\n' + formatDuration(62));//, "1 minute and 2 seconds");
 console.log('-----------------------------\n');
-/*console.log('2 minutes\n' + formatDuration(120));//, "2 minutes");
+console.log('2 minutes\n' + formatDuration(120));//, "2 minutes");
 console.log('-----------------------------\n');
-console.log('1 hour\n'+ +formatDuration(3600));//, "1 hour");
+console.log('1 hour\n'+ formatDuration(3600));//, "1 hour");
 console.log('-----------------------------\n');
-console.log('1 hour, 1 minute and 2 seconds\n' + formatDuration(3662));//, "1 hour, 1 minute and 2 seconds"); */
+console.log('1 hour, 1 minute and 2 seconds\n' + formatDuration(3662));//, "1 hour, 1 minute and 2 seconds");
 console.log('\n');
