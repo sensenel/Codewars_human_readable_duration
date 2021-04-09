@@ -24,30 +24,20 @@
     get units() {
         return this;
     }
-    get unitMatrix() {
-        return [[... Object.values(this)]];
-    }
 }
-
 function formatDuration (seconds) {
-    let result = new timeUnits(seconds), output = '', unitMatrix = result.unitMatrix;
+    let result = new timeUnits(seconds), output = '';
     
     for(let [key, value] of Object.entries(result.units)) {
         if (value > 0) {
             output += value + ' ' + key + (value > 1 ? 's' : '') + ', ';
         } 
     }
-
-        //final format / trim and "and"
+    //trim and "and"
         let lastIndex = output.lastIndexOf(', ');
         output = output.substring(0, lastIndex);
-        
-        lastIndex = output.lastIndexOf(', ');
-        if (lastIndex > 0) {
-            output = output.substring(0, lastIndex) + ' and ' + output.substring(lastIndex + 2);
-        }
 
-    return (seconds === 0) ? 'now' : output;    
+    return (seconds === 0) ? 'now' : output.replace(/,([^,]*)$/," and$1");    
 }
 
 console.log('\n');
